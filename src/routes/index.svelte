@@ -1,13 +1,8 @@
-<style>
-
-</style>
-
 <svelte:head>
     <title>Sharidea</title>
 </svelte:head>
 
 
-<div class="text-2xl">아이디어 공유</div>
 
 <div class="max-w-sm rounded overflow-hidden shadow-lg">
     <div class="px-6 py-4">
