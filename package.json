@@ -3,9 +3,7 @@
   "description": "Sharidea",
   "version": "0.0.1",
   "scripts": {
-    "watch:tailwind": "postcss static/tailwind.css -o static/index.css -w",
-    "build:tailwind": "NODE_ENV=production postcss static/tailwind.css -o static/index.css" ,
-    "build": "yarn run build:tailwind && sapper build --legacy",
+    "build": "sapper build --legacy",
     "dev": "sapper dev",
     "export": "sapper export --legacy",
     "start": "node __sapper__/build",
@@ -34,9 +32,11 @@
     "postcss-cli": "^7.1.0",
     "rollup": "^1.20.0",
     "rollup-plugin-babel": "^4.0.2",
+    "rollup-plugin-postcss": "^2.5.0",
     "rollup-plugin-svelte": "^5.0.1",
     "rollup-plugin-terser": "^4.0.4",
     "sapper": "^0.27.0",
-    "svelte": "^3.0.0"
+    "svelte": "^3.0.0",
+    "svelte-preprocess": "^3.6.0"
   }
 }

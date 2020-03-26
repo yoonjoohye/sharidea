@@ -7,11 +7,17 @@ import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
 
+import sveltePreprocess from "svelte-preprocess";
+import postcss from "rollup-plugin-postcss";
+import path from 'path';
+
+
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
 const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning);
+
 
 export default {
 	client: {
@@ -23,6 +29,7 @@ export default {
 				'process.env.NODE_ENV': JSON.stringify(mode)
 			}),
 			svelte({
+				preprocess: sveltePreprocess({ postcss: true }),
 				dev,
 				hydratable: true,
 				emitCss: true
@@ -67,13 +74,17 @@ export default {
 				'process.env.NODE_ENV': JSON.stringify(mode)
 			}),
 			svelte({
+				preprocess: sveltePreprocess({ postcss: true }),
 				generate: 'ssr',
 				dev
 			}),
 			resolve({
 				dedupe: ['svelte']
 			}),
-			commonjs()
+			commonjs(),
+			postcss({
+				extract: path.resolve(__dirname, "./static/global.css") //js 파일이 생성된 동일한 위치에 css 파일을 추출
+			})
 		],
 		external: Object.keys(pkg.dependencies).concat(
 			require('module').builtinModules || Object.keys(process.binding('natives'))
