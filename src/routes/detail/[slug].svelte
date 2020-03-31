@@ -1,6 +1,5 @@
 <script>
-    import Write from '../components/Write.svelte';
-    import Idea from '../components/Idea.svelte';
+    import Idea from '../../components/Idea.svelte';
 
     let list = [
         {
@@ -33,14 +32,10 @@
     ]
 </script>
 
-
 <svelte:head>
-    <title>Sharidea</title>
+    <title>Detail</title>
 </svelte:head>
 
-
-<Write></Write>
-
 {#each list as item}
-    <Idea item={item}/>
+        <Idea item={item}/>
 {/each}
