@@ -18,17 +18,14 @@
 </style>
 
 <svelte:head>
-	<title>idea</title>
+	<title>mypage</title>
 </svelte:head>
 
-<h1>Recent posts</h1>
+<div class="bg-blue-600 text-center text-white">
+	작성한 아이디어
+</div>
 
-<ul>
-	{#each posts as post}
-		<!-- we're using the non-standard `rel=prefetch` attribute to
-				tell Sapper to load the data for the page as soon as
-				the user hovers over the link or taps it, instead of
-				waiting for the 'click' event -->
-		<li><a rel='prefetch' href='mypage/{post.slug}'>{post.title}</a></li>
-	{/each}
-</ul>
+<div class="bg-blue-600 text-center text-white">
+	좋아요 누른 아이디어
+</div>
+

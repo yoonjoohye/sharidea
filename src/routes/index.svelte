@@ -4,29 +4,29 @@
 
     let list = [
         {
-            slug:'rhdb',
+            slug: 'rhdb',
             contents: ' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis\n' +
                     '        eaque, exercitationem praesentium nihil.',
             date: '2019/03/23'
         },
         {
-            slug:'dh',
+            slug: 'dh',
             contents: 'asdf',
             date: '2019/03/3'
         },
         {
-            slug:'aa',
+            slug: 'aa',
             contents: 'alskdjf;klasjd;fklja;skldfj',
             date: '2019/03/13'
         },
         {
-            slug:'gg',
+            slug: 'gg',
             contents: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis\n' +
                     '        eaque, exercitationem praesentium nihil.',
             date: '2019/03/13'
         },
         {
-            slug:'hmm',
+            slug: 'hmm',
             contents: 'alskdjf;klasjd;fklja;skldfj',
             date: '2019/03/13'
         }
@@ -39,8 +39,11 @@
 </svelte:head>
 
 
-<Write></Write>
-
+<div class="mb-10">
+    <Write/>
+</div>
 {#each list as item}
-    <Idea item={item}/>
+    <div class="mb-5">
+        <Idea item={item}/>
+    </div>
 {/each}

@@ -1,39 +1,89 @@
 <script>
+    let nickname;
+    let email;
+    let password;
+
+    let nicknameValid;
+    let emailValid;
+    let passwordValid;
+
+    const emailCheck = /^[A-Za-z0-9_.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+    const passwordCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
+
+    $:if (!nickname) {
+        nicknameValid = '닉네임을 입력해주세요!';
+    } else {
+        nicknameValid = null;
+    }
+
+    $:if (!email) {
+        emailValid = '이메일을 입력해주세요!';
+    } else if (emailCheck.test(email) === false) {
+        emailValid = '이메일 형식을 맞춰주세요!';
+    } else {
+        emailValid = null;
+    }
+
+    $:if (!password) {
+        passwordValid = '패스워드를 입력해주세요!';
+    } else if (passwordCheck.test(password) === false) {
+        passwordValid = '영문+숫자+문자 조합으로 8~16자를 사용해주세요!';
+    } else {
+        passwordValid = null;
+    }
+
     const onRegister = () => {
-        alert('s');
+
     }
 </script>
 <svelte:head>
     <title>로그인</title>
 </svelte:head>
 
-<section>
-    <form class="w-full max-w-lg">
+<section class="flex items-center justify-center">
+    <form class="w-full max-w-sm">
         <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                    UserName
+            <div class="w-full px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-nickname">
+                    닉네임
                 </label>
-                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-blue-600 focus:bg-white" id="grid-first-name" type="text" placeholder="UserName">
+                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-blue-600 focus:bg-white"
+                       id="grid-nickname" type="text" placeholder="닉네임" bind:value={nickname}>
+                {#if nicknameValid}
+                    <div class="text-sm text-red-500">{nicknameValid}</div>
+                {/if}
             </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full px-3">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
-                    Password
+            <div class="w-full px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-id">
+                    이메일
                 </label>
-                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-blue-600 focus:bg-white focus:border-gray-500" id="grid-password" type="password" placeholder="******************">
-                <p class="text-gray-600 text-xs italic">Make it as long and as crazy as you'd like</p>
+                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-blue-600 focus:bg-white"
+                       id="grid-id" type="text" placeholder="juice@sharidea.com" bind:value={email}>
+                {#if emailValid}
+                    <div class="text-sm text-red-500">{emailValid}</div>
+                {/if}
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-password">
+                    패스워드
+                </label>
+                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-blue-600 focus:bg-white focus:border-gray-500"
+                       id="grid-password" type="password" placeholder="******************" bind:value={password}>
+                {#if passwordValid}
+                    <div class="text-sm text-red-500">{passwordValid}</div>
+                {/if}
             </div>
         </div>
         <div class="md:flex md:items-center">
-            <div class="md:w-1/3"></div>
-            <div class="md:w-2/3">
-                <button class="shadow bg-blue-600 hover:bg-blue-700 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-                        type="button" on:click={onRegister}>
-                    Sign Up
-                </button>
-            </div>
+            <button class="w-full shadow bg-blue-600 hover:bg-blue-700 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+                    type="button" on:click={onRegister}>
+                가입하기
+            </button>
+
         </div>
     </form>
 </section>

@@ -4,7 +4,7 @@
 
 <style>
 	nav {
-		border-bottom: 1px solid rgba(255,62,0,0.1);
+		border-bottom: 1px solid #edf2f7;
 		font-weight: 300;
 		padding: 0 1em;
 	}
@@ -36,7 +36,7 @@
 		content: '';
 		width: calc(100% - 1em);
 		height: 2px;
-		background-color: rgb(255,62,0);
+		background-color: #3182ce;
 		display: block;
 		bottom: -1px;
 	}
@@ -50,13 +50,12 @@
 
 <nav>
 	<ul>
-		<li><a aria-current='{segment === undefined ? "page" : undefined}' href='/'>home</a></li>
+		<li><a aria-current='{segment === undefined ? "page" : undefined}' href='/'>홈</a></li>
 		<!-- for the blog link, we're using rel=prefetch so that Sapper prefetches
 		     the blog data when we hover over the link or tap it on a touchscreen -->
-		<li><a rel=prefetch aria-current='{segment === "mypage" ? "page" : undefined}' href='/mypage'>mypage</a></li>
-		<li><a rel=prefetch aria-current='{segment === "register" ? "page" : undefined}' href='/register'>register</a></li>
+		<li><a rel=prefetch aria-current='{segment === "mypage" ? "page" : undefined}' href='/mypage'>마이페이지</a></li>
 
-		<li><a rel=prefetch aria-current='{segment === "login" ? "page" : undefined}' href='/login'>login</a></li>
+		<li><a rel=prefetch aria-current='{segment === "login" || segment==="register" ? "page" : undefined}' href='/login'>로그인/가입</a></li>
 
 	</ul>
 </nav>
