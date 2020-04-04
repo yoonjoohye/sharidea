@@ -1,18 +1,26 @@
 <script>
-    import gql from 'graphql-tag';
-    import {getClient, mutate} from 'svelte-apollo';
+    import * as graphql from '../graphql/mutation.js';
+    import {mutate} from 'svelte-apollo';
+    import {Apollo} from '../apollo';
+    import {onMount} from 'svelte';
 
-    let nickname;
-    let email;
-    let password;
+    let nickname = '';
+    let email = '';
+    let password = '';
 
     let nicknameValid;
     let emailValid;
     let passwordValid;
 
 
+    let client;
+    onMount(()=>{
+       client=Apollo();
+    });
+
     const emailCheck = /^[A-Za-z0-9_.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
     const passwordCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
+
 
     const onNicknameValid = () => {
         if (!nickname) {
@@ -43,33 +51,18 @@
     }
 
 
-    async function onRegister(){
-        const REGISTER = gql`
-        mutation createUser($nickname: String! $email: String! $pw:String!) {
-              createUser(
-                nickname:$nickname
-                email:$email
-                pw:$password
-              ){
-                id
-                email
-                nickname
-                remember_token
-              }
-           }
-        `;
-        try{
-            const client = getClient();
-
-            await mutate(client, {
-               mutation:REGISTER,
-               variables: { nickname, email, password }
-           });
-        }catch(err){
+    let data;
+    async function onRegister() {
+        try {
+            data=await mutate(client, {
+                mutation: graphql.REGISTER,
+                variables: {nickname, email, password}
+            });
+            console.log(data);
+        } catch (err) {
             console.log(err);
         }
     }
-
 </script>
 
 <svelte:head>
