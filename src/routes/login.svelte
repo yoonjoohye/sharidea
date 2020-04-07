@@ -1,6 +1,32 @@
 <script>
-    const onLogin = () => {
-        alert('s');
+    import * as graphql from '../graphql/mutation';
+    import {mutate} from 'svelte-apollo';
+    import {Apollo} from '../apollo';
+    import {onMount} from 'svelte';
+
+    let email='';
+    let password='';
+
+    let client;
+
+    onMount(()=>{
+        client=Apollo();
+    });
+
+
+    let response;
+    const onLogin = async () => {
+        try{
+            response=await mutate(client,{
+                mutation:graphql.LOGIN,
+                variables:{email,password}
+            });
+            console.log(response);
+            sessionStorage.setItem('Authorization',response.data.login);
+            location.href='/';
+        }catch(err){
+            console.log(err);
+        }
     }
 </script>
 <svelte:head>
@@ -18,7 +44,7 @@
             </div>
             <div class="w-9/12">
                 <input class="bg-gray-200 appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-600"
-                       id="id" type="text" placeholder="juice@sharidea.com">
+                       id="id" type="text" placeholder="juice@sharidea.com" autocomplete="off" bind:value={email}>
             </div>
         </div>
         <div class="md:flex md:items-center mb-6">
@@ -30,7 +56,7 @@
             </div>
             <div class="w-9/12">
                 <input class="bg-gray-200 appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-600"
-                       id="password" type="password" placeholder="******************">
+                       id="password" type="password" placeholder="******************" autocomplete="off" bind:value={password}>
             </div>
         </div>
         <div class="md:flex md:items-center mb-6">

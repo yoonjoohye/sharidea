@@ -1,5 +1,6 @@
 <script>
     import Idea from '../../components/Idea.svelte';
+    import Reply from '../../components/Reply.svelte';
 
     let list = [
         {
@@ -36,6 +37,9 @@
     <title>Detail</title>
 </svelte:head>
 
-{#each list as item}
+<div class="mb-5">
+    {#each list as item}
         <Idea item={item}/>
-{/each}
+    {/each}
+</div>
+<Reply/>

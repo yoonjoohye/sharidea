@@ -12,11 +12,12 @@
     let emailValid;
     let passwordValid;
 
-
     let client;
+
     onMount(()=>{
        client=Apollo();
     });
+
 
     const emailCheck = /^[A-Za-z0-9_.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
     const passwordCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
@@ -50,15 +51,17 @@
         }
     }
 
-
     let data;
-    async function onRegister() {
+    let response;
+    const onRegister=async()=> {
         try {
-            data=await mutate(client, {
+            response=await mutate(client, {
                 mutation: graphql.REGISTER,
                 variables: {nickname, email, password}
             });
-            console.log(data);
+            console.log(response);
+            sessionStorage.setItem('Authorization', response.data.createUser);
+            location.href='/';
         } catch (err) {
             console.log(err);
         }
@@ -66,7 +69,8 @@
 </script>
 
 <svelte:head>
-    <title>회원가입</title></svelte:head>
+    <title>회원가입</title>
+</svelte:head>
 
 <section class="flex items-center justify-center">
     <div class="w-full max-w-sm">
@@ -78,7 +82,7 @@
                 <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-blue-600 focus:bg-white"
                        class:border-red-500={nicknameValid}
                        id="grid-nickname" type="text" placeholder="닉네임" bind:value={nickname}
-                       on:change={onNicknameValid}>
+                       on:change={onNicknameValid} autocomplete="off">
                 {#if nicknameValid}
                     <div class="text-sm text-red-500">{nicknameValid}</div>
                 {/if}
@@ -92,7 +96,7 @@
                 <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-blue-600 focus:bg-white"
                        class:border-red-500={emailValid}
                        id="grid-id" type="text" placeholder="juice@sharidea.com" bind:value={email}
-                       on:change={onEmailValid}>
+                       on:change={onEmailValid} autocomplete="off">
                 {#if emailValid}
                     <div class="text-sm text-red-500">{emailValid}</div>
                 {/if}
@@ -106,7 +110,7 @@
                 <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-blue-600 focus:bg-white focus:border-gray-500"
                        class:border-red-500={passwordValid}
                        id="grid-password" type="password" placeholder="******************" bind:value={password}
-                       on:change={onPasswordValid}>
+                       on:change={onPasswordValid} autocomplete="off">
                 {#if passwordValid}
                     <div class="text-sm text-red-500">{passwordValid}</div>
                 {/if}
