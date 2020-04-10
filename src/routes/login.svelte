@@ -2,22 +2,14 @@
     import * as graphql from '../graphql/mutation';
     import {mutate} from 'svelte-apollo';
     import {Apollo} from '../apollo';
-    import {onMount} from 'svelte';
 
     let email='';
     let password='';
 
-    let client;
-
-    onMount(()=>{
-        client=Apollo();
-    });
-
-
     let response;
     const onLogin = async () => {
         try{
-            response=await mutate(client,{
+            response=await mutate(Apollo(),{
                 mutation:graphql.LOGIN,
                 variables:{email,password}
             });

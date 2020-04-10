@@ -1,6 +1,10 @@
 <script>
     import Write from '../components/Write.svelte';
     import Idea from '../components/Idea.svelte';
+    // import * as graphql from '../graphql/query';
+    // import {Apollo} from '../apollo';
+    // import {onMount} from 'svelte';
+    // import {query} from 'svelte-apollo';
 
     let list = [
         {
@@ -31,6 +35,18 @@
             date: '2019/03/13'
         }
     ]
+
+    // let client;
+    // onMount(()=>{
+    //     client=Apollo();
+    // });
+    //
+    // let response=query(client,{
+    //     query:graphql.CURRENTINFO
+    // });
+    // console.log(response);
+
+
 </script>
 
 

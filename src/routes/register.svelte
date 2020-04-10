@@ -2,7 +2,6 @@
     import * as graphql from '../graphql/mutation.js';
     import {mutate} from 'svelte-apollo';
     import {Apollo} from '../apollo';
-    import {onMount} from 'svelte';
 
     let nickname = '';
     let email = '';
@@ -11,12 +10,6 @@
     let nicknameValid;
     let emailValid;
     let passwordValid;
-
-    let client;
-
-    onMount(()=>{
-       client=Apollo();
-    });
 
 
     const emailCheck = /^[A-Za-z0-9_.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
@@ -55,7 +48,7 @@
     let response;
     const onRegister=async()=> {
         try {
-            response=await mutate(client, {
+            response=await mutate(Apollo(), {
                 mutation: graphql.REGISTER,
                 variables: {nickname, email, password}
             });
