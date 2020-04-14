@@ -1,6 +1,6 @@
 <script>
     import Idea from '../../components/Idea.svelte';
-    import Reply from '../../components/Reply.svelte';
+    import Feedback from '../../components/Feedback.svelte';
 
     let list = [
         {
@@ -44,4 +44,4 @@
         {/if}
     {/each}
 </div>
-<Reply/>
+<Feedback/>

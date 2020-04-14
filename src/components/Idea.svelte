@@ -6,7 +6,7 @@
     }
 
     const goMypage=()=>{
-        location.href='/mypage';
+        location.href=`/mypage/${item.slug}`;
     }
 
     let isClicked=false;
