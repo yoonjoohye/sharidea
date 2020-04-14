@@ -1,10 +1,10 @@
 <script>
     import Write from '../components/Write.svelte';
     import Idea from '../components/Idea.svelte';
-    // import * as graphql from '../graphql/query';
-    // import {Apollo} from '../apollo';
-    // import {query} from 'svelte-apollo';
-    // import {onMount} from 'svelte';
+    import * as graphql from '../graphql/query';
+    import {Apollo} from '../apollo';
+    import {query} from 'svelte-apollo';
+    import {onMount} from 'svelte';
 
     let list = [
         {
@@ -36,14 +36,14 @@
         }
     ];
 
-    // let response;
-    //
-    //     response=query(Apollo(),{
-    //         query:graphql.CURRENTINFO
-    //     });
-    //
-    // $: response.refetch();
-    // console.log(response);
+    let response;
+
+    onMount(async()=>{
+        response=await query(Apollo(),{
+            query:graphql.CURRENTINFO
+        });
+        console.log(response);
+    });
 
     const goDetail = (param) => {
         location.href = `/detail/${param}`;

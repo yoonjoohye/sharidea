@@ -1,10 +1,10 @@
 import gql from 'graphql-tag';
 
 const CURRENTINFO = gql`
-   query me{
-      me{
-        id
-      }
+    query me{
+        me{
+          id
+        }
     }
 `;
 

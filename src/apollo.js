@@ -6,18 +6,19 @@ import { setContext } from 'apollo-link-context';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 
 export const Apollo=()=>{
-    const httpLink = createHttpLink({uri: 'http://192.168.0.9:8000/graphql', fetch: fetch});
-    const cache = new InMemoryCache();
 
-    const authLink = setContext((_, { headers }) => {
-        const token = sessionStorage.getItem('Authorization');
+    const httpLink = createHttpLink({uri: 'http://192.168.0.9:8000/graphql', fetch: fetch});
+
+    const token = sessionStorage.getItem('Authorization');
+    const authLink = setContext(async(_, { headers }) => {
         return {
             headers: {
                 ...headers,
-                authorization: token ? `Bearer ${token}` : "",
+                Authorization: token ? `Bearer ${token}` : "",
             }
         }
     });
+    const cache = new InMemoryCache();
 
     const apolloClient = new ApolloClient({
         link:authLink.concat(httpLink),
