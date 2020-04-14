@@ -3,8 +3,8 @@
     import Idea from '../components/Idea.svelte';
     // import * as graphql from '../graphql/query';
     // import {Apollo} from '../apollo';
-    // import {onMount} from 'svelte';
     // import {query} from 'svelte-apollo';
+    // import {onMount} from 'svelte';
 
     let list = [
         {
@@ -34,18 +34,20 @@
             contents: 'alskdjf;klasjd;fklja;skldfj',
             date: '2019/03/13'
         }
-    ]
+    ];
 
-    // let client;
-    // onMount(()=>{
-    //     client=Apollo();
-    // });
+    // let response;
     //
-    // let response=query(client,{
-    //     query:graphql.CURRENTINFO
-    // });
+    //     response=query(Apollo(),{
+    //         query:graphql.CURRENTINFO
+    //     });
+    //
+    // $: response.refetch();
     // console.log(response);
 
+    const goDetail = (param) => {
+        location.href = `/detail/${param}`;
+    }
 
 </script>
 
@@ -58,8 +60,9 @@
 <div class="mb-10">
     <Write/>
 </div>
+
 {#each list as item}
     <div class="mb-5">
-        <Idea item={item}/>
+        <Idea item={item} />
     </div>
 {/each}

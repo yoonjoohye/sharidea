@@ -16,8 +16,8 @@
 
 <section class="w-full">
     <div class="flex items-center justify-center h-24">
-        <textarea class="w-10/12 p-3 h-full resize-none border w-full focus:border-blue-600" placeholder="의견을 달아주세요" bind:value={text}/>
-        <button class="w-2/12 h-full bg-blue-600 text-white focus:bf-blue-700">등록</button>
+        <textarea class="w-10/12 p-3 h-full resize-none outline-none border w-full focus:border-blue-600" placeholder="의견을 달아주세요" bind:value={text}/>
+        <button class="w-2/12 h-full bg-blue-600 text-white outline-none border-0 focus:bg-blue-700">등록</button>
     </div>
     {#each reply as item, idx }
     <div class="mb-5">

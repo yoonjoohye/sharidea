@@ -39,7 +39,9 @@
 
 <div class="mb-5">
     {#each list as item}
-        <Idea item={item}/>
+        {#if location.pathname===`/detail/${item.slug}`}
+            <Idea item={item}/>
+        {/if}
     {/each}
 </div>
 <Reply/>
