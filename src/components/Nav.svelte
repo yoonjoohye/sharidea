@@ -1,6 +1,6 @@
 <script>
     export let segment;
-    import {user} from '../store/user';
+    import {token} from '../store/user';
 </script>
 
 <style>
@@ -52,7 +52,7 @@
 <nav>
     <ul>
         <li><a aria-current='{segment === undefined ? "page" : undefined}' href='/'>홈</a></li>
-        {#if $user}
+        {#if $token}
             <li><a rel=prefetch aria-current='{segment === "mypage" ? "page" : undefined}' href='/mypage/ds'>마이페이지</a></li>
             <li><a rel=prefetch aria-current='{segment === "logout" ? "page" : undefined}' href='/logout'>로그아웃</a></li>
             <li><a rel=prefetch aria-current='{segment === "user" ? "page" : undefined}' href='/user'>회원관리</a></li>

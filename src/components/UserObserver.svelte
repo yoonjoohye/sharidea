@@ -1,12 +1,26 @@
 <script>
     import {onMount} from 'svelte';
-    import {user} from '../store/user';
+    import * as graphql from '../graphql/query';
+    import {Apollo} from '../apollo';
+    import {query} from 'svelte-apollo';
+    import {token,userInfo} from '../store/user';
 
-    onMount(() => {
+    let response;
+
+    onMount(async() => {
         if (sessionStorage.getItem('Authorization')) {
-            user.set(sessionStorage.getItem('Authorization'));
+            token.set(sessionStorage.getItem('Authorization'));
+
+            response = await query(Apollo(), {
+                query: graphql.CURRENTINFO
+            });
+            $response.then(({data}) => {
+                userInfo.set(data.me);
+                console.log(data.me);
+            });
+
         } else {
-            user.set(null);
+            token.set(null);
         }
     });
 </script>

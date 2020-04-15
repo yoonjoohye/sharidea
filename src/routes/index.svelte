@@ -36,14 +36,23 @@
         }
     ];
 
-    let response;
+    // let response;
+    //
+    // onMount(async () => {
+    //     response = await query(Apollo(), {
+    //         query: graphql.CURRENTINFO
+    //     });
+    //     $response.then(({data}) => {
+    //         console.log(data.me)
+    //     });
+    // });
 
-    onMount(async()=>{
-        response=await query(Apollo(),{
-            query:graphql.CURRENTINFO
-        });
-        console.log(response);
-    });
+    // const onPush=(()=>{
+    //     response=query(Apollo(),{
+    //         query:graphql.CURRENTINFO
+    //     });
+    //     console.log(response);
+    // });
 
     const goDetail = (param) => {
         location.href = `/detail/${param}`;
@@ -55,7 +64,7 @@
 <svelte:head>
     <title>Sharidea</title>
 </svelte:head>
-
+<!--<button on:click={onPush}>lsadf;aljsdf</button>-->
 
 <div class="mb-10">
     <Write/>
@@ -63,6 +72,6 @@
 
 {#each list as item}
     <div class="mb-5">
-        <Idea item={item} />
+        <Idea item={item}/>
     </div>
 {/each}
