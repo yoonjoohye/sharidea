@@ -3,21 +3,37 @@
     import {mutate} from 'svelte-apollo';
     import {Apollo} from '../apollo';
 
-    let email='';
-    let password='';
-
+    let email = '';
+    let password = '';
+    let msg = '';
     let response;
+
+    const onEnter = (event) => {
+        if (event.keyCode === 13) {
+            onLogin();
+        }
+    }
+
     const onLogin = async () => {
-        try{
-            response=await mutate(Apollo(),{
-                mutation:graphql.LOGIN,
-                variables:{email,password}
+        try {
+            response = await mutate(Apollo(), {
+                mutation: graphql.LOGIN,
+                variables: {email, password}
             });
-            console.log(response);
-            sessionStorage.setItem('Authorization',response.data.login);
-            location.href='/';
-        }catch(err){
+            // console.log(response);
+            if (response.data.login) {
+                sessionStorage.setItem('Authorization', response.data.login);
+                location.href = '/';
+            } else {
+                msg='이메일 또는 패스워드가 틀렸습니다.';
+                email='';
+                password='';
+            }
+        } catch (err) {
             console.log(err);
+            if (email==='' || password==='') {
+                msg = '이메일과 패스워드 모두 입력해주세요!';
+            }
         }
     }
 </script>
@@ -48,8 +64,13 @@
             </div>
             <div class="w-9/12">
                 <input class="bg-gray-200 appearance-none border border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-600"
-                       id="password" type="password" placeholder="******************" autocomplete="off" bind:value={password}>
+                       id="password" type="password" placeholder="******************" autocomplete="off"
+                       bind:value={password} on:keydown={onEnter}>
             </div>
+        </div>
+        <div class="md:flex md:items-center mb-6">
+            <div class="w-3/12"></div>
+            <div class="w-9/12text-sm text-red-500">{msg}</div>
         </div>
         <div class="md:flex md:items-center mb-6">
             <div class="w-3/12"></div>

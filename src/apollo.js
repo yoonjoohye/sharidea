@@ -7,7 +7,7 @@ import {InMemoryCache} from 'apollo-cache-inmemory';
 
 export const Apollo=()=>{
 
-    let httpLink = createHttpLink({uri: 'http://192.168.0.9:8000/graphql', fetch:fetch});
+    let httpLink = createHttpLink({uri: 'https://api.sharidea.yoonjoohye.xyz/graphql', fetch:fetch});
 
     let authLink = setContext((_, { headers }) => {
         const token = sessionStorage.getItem('Authorization');

@@ -1,6 +1,11 @@
 <script>
     export let segment;
-    import {token} from '../store/user';
+    import {token,userInfo} from '../store/user';
+
+    // userInfo.subscribe(value=>{
+    //     console.log(value);
+    // })
+
 </script>
 
 <style>
@@ -49,11 +54,12 @@
     }
 </style>
 
+
 <nav>
     <ul>
         <li><a aria-current='{segment === undefined ? "page" : undefined}' href='/'>홈</a></li>
         {#if $token}
-            <li><a rel=prefetch aria-current='{segment === "mypage" ? "page" : undefined}' href='/mypage/ds'>마이페이지</a></li>
+            <li><a rel=prefetch aria-current='{segment === "mypage" ? "page" : undefined}' href='/mypage/df'>마이페이지</a></li>
             <li><a rel=prefetch aria-current='{segment === "logout" ? "page" : undefined}' href='/logout'>로그아웃</a></li>
             <li><a rel=prefetch aria-current='{segment === "user" ? "page" : undefined}' href='/user'>회원관리</a></li>
             <li><a rel=prefetch aria-current='{segment === "idea" ? "page" : undefined}' href='/idea'>아이디어관리</a></li>

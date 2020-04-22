@@ -4,6 +4,7 @@ const CURRENTINFO = gql`
     query me{
         me{
             id,
+            master,
             nickname,
             email,
             created_at

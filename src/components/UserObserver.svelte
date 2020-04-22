@@ -8,19 +8,21 @@
     let response;
 
     onMount(async() => {
-        if (sessionStorage.getItem('Authorization')) {
-            token.set(sessionStorage.getItem('Authorization'));
+        if (sessionStorage.getItem('Authorization')!==null) {
+            $token=sessionStorage.getItem('Authorization');
 
             response = await query(Apollo(), {
                 query: graphql.CURRENTINFO
             });
+
             $response.then(({data}) => {
-                userInfo.set(data.me);
-                console.log(data.me);
+                $userInfo=data.me;
+                (data.me);
             });
 
         } else {
-            token.set(null);
+            $token=null;
+            $userInfo=null;
         }
     });
 </script>

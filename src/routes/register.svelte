@@ -47,17 +47,46 @@
     let data;
     let response;
 
-    const onRegister=async()=> {
+    const onRegister = async () => {
         try {
-            response=await mutate(Apollo(), {
+            response = await mutate(Apollo(), {
                 mutation: graphql.REGISTER,
                 variables: {nickname, email, password}
             });
-            console.log(response);
-            sessionStorage.setItem('Authorization', response.data.createUser);
-            location.href='/';
+
+            if (response.data.createUser) {
+                sessionStorage.setItem('Authorization', response.data.createUser);
+                location.href = '/';
+            } else {
+                // console.log('error');
+            }
+
         } catch (err) {
-            console.log(err);
+            if (!nickname) {
+                nicknameValid = '닉네임을 입력해주세요!';
+            } else if (err.graphQLErrors[0].extensions.validation.nickname.length === 1) {
+                nicknameValid = '이미 존재하는 닉네임입니다.';
+            }else{
+                nicknameValid = null;
+            }
+
+            if (!email) {
+                emailValid = '이메일을 입력해주세요!';
+            } else if (emailCheck.test(email) === false) {
+                emailValid = '이메일 형식을 맞춰주세요!';
+            } else if (err.graphQLErrors[0].extensions.validation.email.length === 1) {
+                emailValid = '이미 존재하는 이메일입니다.';
+            }else{
+                emailValid = null;
+            }
+
+            if (!password) {
+                passwordValid = '패스워드를 입력해주세요!';
+            } else if (passwordCheck.test(password) === false) {
+                passwordValid = '영문+숫자+문자 조합으로 8~16자를 사용해주세요!';
+            }else{
+                passwordValid = null;
+            }
         }
     }
 </script>
