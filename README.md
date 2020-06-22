@@ -7,6 +7,9 @@
 > Svelte, Sapper, TailwindCSS, GraphQL, Apollo-client
 
 
+## 개발 상태
+30% 개발(아직 진행 중임)
+
 ## 만들게 된 이유
 
 - svelte 공부, graphql 공부 겸 만들게 됨.
